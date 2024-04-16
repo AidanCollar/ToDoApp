@@ -22,7 +22,7 @@ app.get('/', (_, response) => {
 // GET /api/todos
 app.get('/api/todos',(_,response)=>{
 	const itemArray = todos.map(todo => todo.item);
-    response.send(itemArray);
+    response.send({itemArray});
 })
 // POST /api/todos
 app.post('/api/todos',(request,response)=>{
@@ -30,7 +30,8 @@ app.post('/api/todos',(request,response)=>{
 	const id = todos.length + 1
 	const complete = false
 	todos.push({ id, item, complete })
-	response.json('The new id is '+id)
+	response.send({id})
+	
 
 }
 )
@@ -39,8 +40,7 @@ app.put('/api/todos/:id',(request,response)=>{
 	const { id } = request.params
 	const task = todos.find(todo => todo.id.toString() === id)
 	task.complete = !task.complete // toggle the complete property
-	const itemArray = todos.map(todo => `Task| ${todo.item} | Is it Complete? ${todo.complete}`);
-    response.send(itemArray);
+    response.send({id, complete: task.complete})
 
 })
 
