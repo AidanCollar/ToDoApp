@@ -21,8 +21,8 @@ app.get('/', (_, response) => {
 
 // GET /api/todos
 app.get('/api/todos',(_,response)=>{
-	const itemArray = todos.map(todo => todo.item);
-    response.send({itemArray});
+	
+    response.send(todos);
 })
 // POST /api/todos
 app.post('/api/todos',(request,response)=>{
